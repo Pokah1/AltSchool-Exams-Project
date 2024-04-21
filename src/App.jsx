@@ -7,13 +7,16 @@ import PageNotFound from '../components/404page';
 
 const App = () => {
   return (
-    <Routes>
-      <Route exact path="/" element={<HomePage />} /> 
-      <Route exact path="/repos" element={<GitHubRepositories />} /> 
-      <Route path="/repo/:repoName" element={<RepositoryDetails />} /> 
-      <Route path="*" element={<PageNotFound />} /> 
-    </Routes>
+    <main>
+      <Routes>
+        <Route exact path="/" element={<HomePage />} /> 
+        <Route exact path="/repos" element={<GitHubRepositories />} /> 
+        <Route path="/repo/:repoName" element={<RepositoryDetails />} /> 
+        <Route path="*" element={<PageNotFound />} /> 
+      </Routes>
+    </main>
   );
 };
+
 
 export default App;

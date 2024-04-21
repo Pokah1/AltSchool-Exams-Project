@@ -2,54 +2,79 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PageNotFound from './404page';
 
-const RepositoryDetails = ({ repos }) => {
+const RepositoryDetails = () => {
   const { repoName } = useParams();
   const [repoDetails, setRepoDetails] = useState(null);
+  const [ownerDetails, setOwnerDetails] = useState(null); // State to store owner details
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    console.log("Repos:", repos)
-  if (!repos) return;
-    const currentRepo = repos.find(repo => repo.name === repoName);
-    // console.log("Current Repo:" currentRepo);
-    if (currentRepo) {
-      setRepoDetails(currentRepo);
-    } else {
-      setNotFound(true);
-    }
-  }, [repos, repoName]);
+    // Fetch details of the repository with repoName
+    fetch(`https://api.github.com/repos/Pokah1/${repoName}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch repository details');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Fetched repo details:', data);
+        setRepoDetails(data);
+        fetchOwnerDetails(data.owner.login); // Fetch owner details
+      })
+      .catch(error => {
+        console.error('Error fetching repository details: ', error);
+        setNotFound(true);
+      });
+  }, [repoName]);
+
+  // Function to fetch owner details
+  const fetchOwnerDetails = (ownerLogin) => {
+    fetch(`https://api.github.com/users/${ownerLogin}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch owner details');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Fetched owner details:', data);
+        setOwnerDetails(data);
+      })
+      .catch(error => {
+        console.error('Error fetching owner details: ', error);
+      });
+  };
 
   if (notFound) {
     return <PageNotFound />;
   }
 
-  if (!repoDetails) {
+  if (!repoDetails || !ownerDetails) {
     return <p>Loading...</p>;
   }
 
-  // Logic to determine index of current repository
-  const currentIndex = repos.findIndex(repo => repo.name === repoName);
-  const previousIndex = (currentIndex - 1 + repos.length) % repos.length;
-  const nextIndex = (currentIndex + 1) % repos.length;
-
-  // Get previous and next repository names
-  const previousRepoName = repos[previousIndex].name;
-  const nextRepoName = repos[nextIndex].name;
-
   return (
-    <div>
-      <div>
-        <h2>{repoDetails.name}</h2>
-        <p>{repoDetails.description}</p>
-        <p>Language: {repoDetails.language}</p>
-        <p>Stars: {repoDetails.stargazers_count}</p>
-        <p>Forks: {repoDetails.forks_count}</p>
-        <p>Last Updated: {repoDetails.updated_at}</p>
-        <p>License: {repoDetails.license ? repoDetails.license.name : 'N/A'}</p>
-        <Link to={`/repo/${previousRepoName}`}>Previous</Link>
-        <Link to={`/repo/${nextRepoName}`}>Next</Link>
-      </div>
-    </div>
+    <article>
+      <h2>{repoDetails.name}</h2>
+      <p>{repoDetails.description}</p>
+      <p>Language: {repoDetails.language}</p>
+      <p>Stars: {repoDetails.stargazers_count}</p>
+      <p>Forks: {repoDetails.forks_count}</p>
+      <p>Last Updated: {repoDetails.updated_at}</p>
+      <p>License: {repoDetails.license ? repoDetails.license.name : 'N/A'}</p>
+      <p>Repository URL: <a href={repoDetails.html_url} target="_blank" rel="noopener noreferrer">{repoDetails.html_url}</a></p>
+
+      {/* Display owner details */}
+      <aside>
+        <h3>Owner Details</h3>
+        <p>Username: {ownerDetails.login}</p>
+        <img src={ownerDetails.avatar_url} alt="Owner Avatar" />
+        <p>Profile: <a href={ownerDetails.html_url} target="_blank" rel="noopener noreferrer">{ownerDetails.html_url}</a></p>
+      </aside>
+      
+      <Link to="/repos"><button>Return to Fetch Repos</button></Link>
+    </article>
   );
 };
 
