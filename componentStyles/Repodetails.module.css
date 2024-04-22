@@ -1,0 +1,93 @@
+.mainn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+.container {
+  flex: 1;
+  margin: 20px 20px 10px 30px;
+  padding: 0 0 10px 10px;
+  position: fixed;
+  right: 40%;
+  left: 0;
+  top: 0;
+  height: 1000vh;
+}
+
+.ownerDetails {
+  padding-left: 20px;
+  border-left: 1px solid greenyellow;
+  position: fixed;
+  left: 60%;
+  width: 40%;
+  top: 40px;
+  text-align: justify;
+}
+
+.ownerDetails h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+figure {
+  margin-top: 70px;
+  margin-bottom: 40px;
+  display: flex;
+}
+figure img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 40px 10px 40px 10px;
+}
+
+.ownerDetails p {
+  margin-bottom: 10px;
+}
+
+.ownerDetails a {
+  color: dodgerblue;
+}
+
+.button {
+  padding: 20px;
+  width: 200px;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 15px 0 rgba(46, 68, 36, 0.75);
+  margin: 30px 30px 50px 30px;
+  font-size: 1rem;
+  -webkit-background-clip: text;
+  font-size: 1.2rem;
+}
+
+.heada {
+  font-size: 1.5rem;
+  margin: 15px 0 40px 0;
+  background: linear-gradient(to left, #f6fa0af5, green);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation-name: slidein;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}
+@media (max-width: 700px) {
+  .container {
+    margin: 70px 20px 10px 30px;
+
+    position: static;
+
+    height: 100vh;
+  }
+
+  .description {
+    margin-bottom: 30px;
+    line-height: 1.8rem;
+  }
+
+  .ownerDetails {
+    display: none;
+  }
+}

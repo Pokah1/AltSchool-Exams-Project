@@ -1,16 +1,10 @@
-body{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-main {
+.main {
   display: flex;
   width: 100vw;
   height: 100vh;
 }
 
-.side1{
+.side1 {
   flex: 1;
   margin: 70px 20px 10px 30px;
   padding: 0 0 0 10px;
@@ -20,7 +14,6 @@ main {
   top: 0;
   height: 100vh;
 }
-
 
 .username {
   font-size: 3rem;
@@ -36,7 +29,7 @@ main {
 
 @keyframes slidein {
   from {
-    margin-left: 40%;
+    margin-left: 30%;
     width: 100%;
   }
 
@@ -51,7 +44,6 @@ main {
   color: transparent;
   font-size: 1.3rem;
   margin-bottom: 30px;
-
 }
 .span-tag {
   background: linear-gradient(to left, #f6fa0af5, green);
@@ -66,33 +58,106 @@ main {
 
   border-radius: 5px;
   box-shadow: 0 4px 15px 0 rgba(24, 36, 19, 0.75);
-  margin: 30px 30px;
+  margin: 30px 30px 50px 30px;
   font-size: 1rem;
   height: 100%;
   -webkit-background-clip: text;
   font-size: 1.2rem;
 }
-.side2{
+.side2 {
   padding-left: 20px;
   border-left: 1px solid greenyellow;
   position: fixed;
   left: 60%;
   width: 40%;
   top: 40px;
-  text-align:justify;
+  text-align: justify;
 }
-figure{
+figure {
   margin-top: 70px;
-  margin-bottom: 40px; 
- display: flex;
+  margin-bottom: 40px;
+  display: flex;
 }
 figure img {
   height: 300px;
   width: 300px;
   object-fit: cover;
-  border-radius: 40px 10px  40px 10px;
-
+  border-radius: 40px 10px 40px 10px;
 }
+.social-svgs {
+  width: 20vw;
+  display: flex;
+  gap: 70px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-left: 50px;
+  color: #fff;
+}
+.copyright {
+  font-size: 1rem;
+  color: rgb(172, 125, 125);
+  margin: 50px 20px 0 70px;
+}
+@media (max-width: 700px) {
+  body {
+    height: 150vh;
+  }
 
+  main {
+    display: block;
+    width: fit-content;
 
+    margin-right: 30px;
+  }
 
+  .username {
+    animation: slidein 7s infinite;
+    margin-left: 40px;
+  }
+  .userInfo {
+    background: linear-gradient(to left, #f6fa0af5, green);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 1.3rem;
+    margin: 30px 0 25px 40px;
+  }
+
+  .span-tag {
+    margin-left: 40px;
+  }
+
+  .homebtns {
+    margin: 30px 10px 50px 40px;
+  }
+
+  .side2 {
+    display: none;
+  }
+
+  .side1 {
+    margin: 70px 20px 10px 30px;
+    padding: 0 0 0 40px;
+    position: relative;
+    text-align: left;
+  }
+
+  .copyright {
+    font-size: 1rem;
+    color: rgb(172, 125, 125);
+    margin: 50px 10px 0 5px;
+    white-space: nowrap;
+  }
+  .small-srcn-svg {
+    width: 20vw;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-left: 50px;
+    color: #fff;
+  }
+}
